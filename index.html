@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Polymer Bin</title>
+
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="limited-elements.html">
+    <link rel="import" href="x-element.html">
+
+</head>
+
+<body>
+<x-element></x-element>
+</body>
+<script>
+    window.addEventListener('WebComponentsReady', function() {
+        function applyClientTheme(client) {
+            var link = document.createElement('link');
+            link.rel = 'import';
+            link.href = client+'.html';
+            Polymer.dom(document.head).appendChild(link);
+        }
+        applyClientTheme('theme');
+    });
+</script>
+</html>

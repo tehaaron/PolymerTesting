@@ -1,0 +1,71 @@
+<dom-module id="x-element">
+    <style>
+        paper-material {
+            xheight: 400px;
+            width: 400px;
+            background-color: var(--button-bg-color);
+            margin: 0 auto;
+        }
+        paper-button {
+            width: 100%;
+            margin:0;
+        }
+        paper-button:hover{
+            background-color: black;
+            color: var(--button-two-color); /*this is what the theme.css/html file would change */
+        }
+    </style>
+    <template id="myTemplate">
+        <paper-material id="material" elevation="3">
+
+            <div class="layout vertical">
+                <paper-button>One</paper-button>
+                <paper-button>Two</paper-button>
+                <paper-button>Three</paper-button>
+            </div>
+
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'x-element',
+            behaviors: [
+                Polymer.NeonAnimationRunnerBehavior
+            ],
+
+            properties: {
+                animationConfig: {
+                    value: function() {
+                        return {
+                            'entry': {
+                                name: 'slide-down-animation',
+                                node: this.$.material
+                            },
+                            'exit': {
+                                name: 'slide-up-animation',
+                                node: this.$.material
+                            }
+                        }
+                    }
+                }
+            },
+            ready: function(){
+                this.playAnimation('entry');
+
+                setTimeout(function() {
+                    Polymer.updateStyles();
+                }, 2000);
+//              Partial Attempt - no styles applied
+//                var doc = this.currentScript.ownerDocument,//this worked when the custom element code was included in the index.html as one file but not anymore
+//                        css = '@import url(theme.html)',
+//                        myTemplate = doc.querySelector('template#myTemplate'),
+//                        thisStyle = document.createElement('style'),
+//                        beforeNode = Polymer.dom(myTemplate).childNodes[0];
+//                thisStyle.appendChild(document.createTextNode(css));
+//                Polymer.dom(myTemplate).insertBefore(thisStyle, beforeNode);
+//                console.log(doc);
+//                console.log(myTemplate);
+            }
+        });
+    </script>
+</dom-module>
